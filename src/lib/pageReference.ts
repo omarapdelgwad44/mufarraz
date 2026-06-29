@@ -1,7 +1,11 @@
 import { toWestern } from './arabicNumerals';
 
+export function normalize(page: string): string {
+  return toWestern(page.trim()).replace(/\s*\/\s*/g, '/');
+}
+
 export function pagesByVolume(page: string): Record<number, number[]> {
-  const normalized = toWestern(page.trim());
+  const normalized = normalize(page);
   if (normalized === '') return {};
 
   const match = normalized.match(/^(\d+)\/(\d+)(.*)$/u);
@@ -29,17 +33,31 @@ export function expand(page: string): string[] {
 
   if (expanded.length > 0) return expanded;
 
-  const normalized = toWestern(page.trim());
+  const normalized = normalize(page);
   return normalized === '' ? [''] : [normalized];
 }
 
 export function format(volume: number, pages: number[]): string {
   const unique = [...new Set(pages)].sort((a, b) => a - b);
-  let formatted = `${volume}/${unique[0]}`;
 
-  for (let i = 1; i < unique.length; i++) {
-    formatted += ` ،${unique[i]}`;
+  if (unique.length === 1) {
+    return `${volume}/${unique[0]}`;
   }
 
-  return formatted;
+  const anchor = `${volume}/${unique[0]}`;
+  const extras = unique.slice(1).sort((a, b) => b - a);
+
+  return [...extras.map(String), anchor].join(' ،');
+}
+
+export function formatMerged(pagesByVol: Record<number, number[]>): string {
+  const volumes = Object.keys(pagesByVol).map(Number).sort((a, b) => a - b);
+  const parts: string[] = [];
+
+  for (const volume of volumes) {
+    const pages = [...new Set(pagesByVol[volume])].sort((a, b) => a - b);
+    parts.push(format(volume, pages));
+  }
+
+  return parts.join(' ،');
 }

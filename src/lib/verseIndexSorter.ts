@@ -1,5 +1,5 @@
 import { toWestern } from './arabicNumerals';
-import { format, pagesByVolume } from './pageReference';
+import { formatMerged, pagesByVolume } from './pageReference';
 import { VerseIndexEntry, SurahGroup } from './types';
 
 function normalizeText(text: string): string {
@@ -49,14 +49,14 @@ function mergePages(entries: VerseIndexEntry[]): VerseIndexEntry[] {
       }
     }
 
-    const volumes = Object.keys(pagesByVol).map(Number).sort((a, b) => a - b);
-
-    for (const volume of volumes) {
-      const pages = [...new Set(pagesByVol[volume])].sort((a, b) => a - b);
-      merged.push(
-        new VerseIndexEntry(cluster[0].verse, cluster[0].surah, cluster[0].ayah, format(volume, pages)),
-      );
-    }
+    merged.push(
+      new VerseIndexEntry(
+        cluster[0].verse,
+        cluster[0].surah,
+        cluster[0].ayah,
+        formatMerged(pagesByVol),
+      ),
+    );
   }
 
   merged.sort((a, b) => {

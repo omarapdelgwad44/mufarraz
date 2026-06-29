@@ -148,6 +148,85 @@
         background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
     }
 
+    .idx-card-notes {
+        @apply rounded-[1.5rem] border p-5 sm:p-6;
+        border-color: rgb(45 106 79 / 0.14);
+        background:
+            linear-gradient(160deg, rgb(255 253 248 / 0.98) 0%, rgb(243 237 226 / 0.88) 100%);
+        box-shadow: inset 3px 0 0 var(--color-accent);
+    }
+
+    .idx-notes-head {
+        @apply mb-5 flex items-start gap-3;
+    }
+
+    .idx-notes-emblem {
+        @apply mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-base text-accent-deep;
+        background: rgb(45 106 79 / 0.1);
+    }
+
+    .idx-notes-title {
+        @apply text-base font-bold text-ink;
+        font-family: var(--font-display);
+    }
+
+    .idx-notes-sub {
+        @apply mt-1 text-xs leading-6 text-muted;
+    }
+
+    .idx-notes-list {
+        @apply space-y-3;
+    }
+
+    .idx-note {
+        @apply flex gap-3 rounded-[1.1rem] border px-4 py-3.5;
+        border-color: rgb(19 35 31 / 0.06);
+        background: rgb(255 255 255 / 0.62);
+    }
+
+    .idx-note-highlight {
+        border-color: rgb(166 124 61 / 0.22);
+        background: rgb(255 251 243 / 0.9);
+    }
+
+    .idx-note-bullet {
+        @apply mt-2 h-2 w-2 shrink-0 rounded-full;
+        background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    }
+
+    .idx-note-text {
+        @apply text-sm leading-8 text-ink-soft;
+    }
+
+    .idx-note-lead {
+        @apply block;
+    }
+
+    .idx-note-examples {
+        @apply mt-2 flex flex-wrap items-center gap-2;
+    }
+
+    .idx-note-sep {
+        @apply text-xs font-medium text-muted;
+    }
+
+    .idx-page-ref {
+        @apply rounded-lg border px-2.5 py-1 text-[0.92rem] font-semibold tracking-wide text-accent-deep;
+        border-color: rgb(45 106 79 / 0.18);
+        background: rgb(232 244 237 / 0.75);
+        font-family: 'Traditional Arabic', var(--font-display), serif;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+    }
+
+    .idx-mark-ref {
+        @apply rounded-md border px-2 py-1 text-sm font-semibold text-ink;
+        border-color: rgb(19 35 31 / 0.1);
+        background: rgb(255 255 255 / 0.9);
+        font-family: var(--font-display), serif;
+        white-space: nowrap;
+    }
+
     .idx-ornament {
         @apply pointer-events-none absolute rounded-full blur-3xl;
         background: radial-gradient(circle, rgb(166 124 61 / 0.16) 0%, transparent 70%);

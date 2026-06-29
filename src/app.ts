@@ -157,12 +157,41 @@ function render(): void {
                   `).join('')}
                 </div>
               </div>
-              <div class="idx-card-muted">
-                <h3 class="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-gold">${t('panel_notes')}</h3>
-                <ul class="space-y-2 text-sm leading-7 text-muted">
-                  <li>${t('note_1')}</li>
-                  <li>${t('note_2')}</li>
-                  <li>${t('note_3')}</li>
+              <div class="idx-card-notes">
+                <div class="idx-notes-head">
+                  <span class="idx-notes-emblem" aria-hidden="true">◈</span>
+                  <div>
+                    <h3 class="idx-notes-title">${t('panel_notes')}</h3>
+                    <p class="idx-notes-sub">${t('panel_notes_sub')}</p>
+                  </div>
+                </div>
+                <ul class="idx-notes-list">
+                  <li class="idx-note">
+                    <span class="idx-note-bullet" aria-hidden="true"></span>
+                    <p class="idx-note-text">
+                      <span class="idx-note-lead">${t('note_1')}</span>
+                      <span class="idx-note-examples">
+                        <span class="idx-page-ref">${t('note_1_example_a')}</span>
+                        <span class="idx-note-sep">${t('note_1_or')}</span>
+                        <span class="idx-page-ref">${t('note_1_example_b')}</span>
+                      </span>
+                    </p>
+                  </li>
+                  <li class="idx-note">
+                    <span class="idx-note-bullet" aria-hidden="true"></span>
+                    <p class="idx-note-text">
+                      <span class="idx-note-lead">${t('note_2')}</span>
+                      <span class="idx-note-examples">
+                        <span class="idx-mark-ref">${t('note_2_mark_a')}</span>
+                        <span class="idx-note-sep">${getLocale() === 'ar' ? 'و' : 'and'}</span>
+                        <span class="idx-mark-ref">${t('note_2_mark_b')}</span>
+                      </span>
+                    </p>
+                  </li>
+                  <li class="idx-note idx-note-highlight">
+                    <span class="idx-note-bullet" aria-hidden="true"></span>
+                    <p class="idx-note-text">${t('note_3')}</p>
+                  </li>
                 </ul>
               </div>
             </aside>
