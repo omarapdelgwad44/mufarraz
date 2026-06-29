@@ -39,15 +39,13 @@ export function expand(page: string): string[] {
 
 export function format(volume: number, pages: number[]): string {
   const unique = [...new Set(pages)].sort((a, b) => a - b);
+  let formatted = `${volume}/${unique[0]}`;
 
-  if (unique.length === 1) {
-    return `${volume}/${unique[0]}`;
+  for (let i = 1; i < unique.length; i++) {
+    formatted += ` ،${unique[i]}`;
   }
 
-  const anchor = `${volume}/${unique[0]}`;
-  const extras = unique.slice(1).sort((a, b) => b - a);
-
-  return [...extras.map(String), anchor].join(' ،');
+  return formatted;
 }
 
 export function formatMerged(pagesByVol: Record<number, number[]>): string {

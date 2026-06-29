@@ -29,7 +29,7 @@ describe('sortAndGroup', () => {
     const groups = sortAndGroup(entries);
 
     expect(groups[0].entries).toHaveLength(1);
-    expect(groups[0].entries[0].page).toBe('375 ،360 ،2/359');
+    expect(groups[0].entries[0].page).toBe('2/359 ،360 ،375');
   });
 
   it('merges pages for same verse and ayah within volume', () => {
@@ -43,7 +43,7 @@ describe('sortAndGroup', () => {
     const groups = sortAndGroup(entries);
 
     expect(groups[0].entries).toHaveLength(1);
-    expect(groups[0].entries[0].page).toBe('375 ،360 ،2/359');
+    expect(groups[0].entries[0].page).toBe('2/359 ،360 ،375');
   });
 
   it('merges entries with arabic indic numerals', () => {
@@ -56,7 +56,7 @@ describe('sortAndGroup', () => {
     const groups = sortAndGroup(entries);
 
     expect(groups[0].entries).toHaveLength(1);
-    expect(groups[0].entries[0].page).toBe('375 ،360 ،2/359');
+    expect(groups[0].entries[0].page).toBe('2/359 ،360 ،375');
   });
 
   it('merges pages for hamd verse across volumes', () => {
@@ -73,7 +73,7 @@ describe('sortAndGroup', () => {
     const groups = sortAndGroup(entries);
 
     expect(groups[0].entries).toHaveLength(1);
-    expect(groups[0].entries[0].page).toBe('572 ،571 ،569 ،1/553 ،571 ،2/569');
+    expect(groups[0].entries[0].page).toBe('1/553 ،569 ،571 ،572 ،2/569 ،571');
   });
 
   it('merges matching verse across volumes into one row', () => {
@@ -99,6 +99,6 @@ describe('sortAndGroup', () => {
     const groups = sortAndGroup(entries);
 
     expect(groups[0].entries).toHaveLength(1);
-    expect(groups[0].entries[0].page).toBe('376 ،2/370');
+    expect(groups[0].entries[0].page).toBe('2/370 ،376');
   });
 });
