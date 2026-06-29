@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="مُفَرَّز">
+  <defs>
+    <linearGradient id="bg" x1="24" y1="12" x2="156" y2="168" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2d6a4f"/>
+      <stop offset="1" stop-color="#1b4332"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="url(#bg)"/>
+  <text x="90" y="118" text-anchor="middle" font-size="92" fill="#ffffff" font-family="'Traditional Arabic', 'Amiri', serif">۞</text>
+</svg>
