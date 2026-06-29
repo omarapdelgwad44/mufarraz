@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-display: 'Amiri', 'Traditional Arabic', serif;
+    --font-sans: 'Cairo', ui-sans-serif, system-ui, sans-serif;
+
+    --color-ink: #13231f;
+    --color-ink-soft: #2a4039;
+    --color-parchment: #f3ede2;
+    --color-parchment-deep: #e8dfd0;
+    --color-parchment-line: #d9cfbe;
+    --color-accent: #2d6a4f;
+    --color-accent-deep: #1b4332;
+    --color-gold: #a67c3d;
+    --color-gold-soft: #d4b06a;
+    --color-muted: #6f6760;
+    --color-surface: #fffdf8;
+    --color-surface-elevated: #ffffff;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        color: var(--color-ink);
+        background-color: var(--color-parchment);
+        background-image:
+            radial-gradient(circle at 12% 8%, rgb(45 106 79 / 0.07), transparent 34%),
+            radial-gradient(circle at 88% 18%, rgb(166 124 61 / 0.08), transparent 30%),
+            linear-gradient(180deg, var(--color-parchment) 0%, #efe7da 100%);
+        min-height: 100vh;
+    }
+
+    ::selection {
+        background: rgb(45 106 79 / 0.18);
+        color: var(--color-ink);
+    }
+}
+
+@layer components {
+    .idx-shell {
+        @apply relative isolate min-h-screen overflow-hidden;
+    }
+
+    .idx-grid-bg {
+        background-image:
+            linear-gradient(rgb(19 35 31 / 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgb(19 35 31 / 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(180deg, black, transparent 92%);
+    }
+
+    .idx-header {
+        @apply sticky top-0 z-40 border-b backdrop-blur-md;
+        border-color: rgb(19 35 31 / 0.08);
+        background: rgb(255 253 248 / 0.82);
+    }
+
+    .idx-brand {
+        font-family: var(--font-display);
+        @apply text-3xl leading-none tracking-tight text-ink;
+    }
+
+    .idx-display {
+        font-family: var(--font-display);
+    }
+
+    .idx-card {
+        @apply rounded-[1.75rem] border bg-surface p-6 shadow-[0_24px_60px_-34px_rgb(19_35_31_/_0.45)] sm:p-8;
+        border-color: rgb(19 35 31 / 0.08);
+    }
+
+    .idx-card-muted {
+        @apply rounded-[1.5rem] border bg-parchment/70 p-5;
+        border-color: rgb(19 35 31 / 0.06);
+    }
+
+    .idx-upload {
+        @apply relative flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-[1.5rem] border-2 border-dashed px-6 py-10 text-center transition duration-300;
+        border-color: rgb(45 106 79 / 0.28);
+        background:
+            linear-gradient(145deg, rgb(255 253 248 / 0.96), rgb(243 237 226 / 0.88));
+    }
+
+    .idx-upload:hover,
+    .idx-upload:focus-within {
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px -28px rgb(45 106 79 / 0.55);
+    }
+
+    .idx-upload.is-ready {
+        border-style: solid;
+        border-color: rgb(45 106 79 / 0.35);
+        background: linear-gradient(145deg, rgb(255 255 255 / 0.98), rgb(232 244 237 / 0.7));
+    }
+
+    .idx-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition duration-300 disabled:cursor-not-allowed disabled:opacity-50;
+        background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-deep) 100%);
+        box-shadow: 0 14px 30px -18px rgb(27 67 50 / 0.9);
+    }
+
+    .idx-btn-primary:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 34px -16px rgb(27 67 50 / 0.95);
+    }
+
+    .idx-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition duration-300;
+        border-color: rgb(19 35 31 / 0.12);
+        background: rgb(255 253 248 / 0.9);
+        color: var(--color-ink-soft);
+    }
+
+    .idx-btn-secondary:hover {
+        border-color: rgb(45 106 79 / 0.35);
+        color: var(--color-accent-deep);
+    }
+
+    .idx-btn-success {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition duration-300;
+        background: linear-gradient(135deg, #3a7d5c 0%, var(--color-accent-deep) 100%);
+    }
+
+    .idx-stat {
+        @apply rounded-[1.25rem] border px-4 py-5;
+        border-color: rgb(19 35 31 / 0.07);
+        background: rgb(255 255 255 / 0.72);
+    }
+
+    .idx-stat-value {
+        font-family: var(--font-display);
+        @apply text-4xl leading-none text-accent-deep;
+    }
+
+    .idx-step {
+        @apply flex gap-4 rounded-[1.15rem] border px-4 py-4;
+        border-color: rgb(19 35 31 / 0.06);
+        background: rgb(255 255 255 / 0.55);
+    }
+
+    .idx-step-num {
+        @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white;
+        background: linear-gradient(135deg, var(--color-gold-soft), var(--color-gold));
+    }
+
+    .idx-ornament {
+        @apply pointer-events-none absolute rounded-full blur-3xl;
+        background: radial-gradient(circle, rgb(166 124 61 / 0.16) 0%, transparent 70%);
+    }
+
+    .idx-fade-up {
+        animation: idx-fade-up 0.7s ease both;
+    }
+
+    .idx-fade-up-delay {
+        animation: idx-fade-up 0.85s ease 0.12s both;
+    }
+
+    .sr-only {
+        @apply absolute -m-px h-px w-px overflow-hidden border-0 p-0 whitespace-nowrap;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .toast {
+        @apply fixed z-50 rounded-xl border px-5 py-3 text-sm font-medium shadow-lg;
+        border-color: rgb(45 106 79 / 0.2);
+        background: rgb(255 255 255 / 0.96);
+        color: var(--color-ink);
+        animation: idx-fade-up 0.35s ease both;
+    }
+
+    .toast.error {
+        border-color: rgb(185 28 28 / 0.25);
+        color: #991b1b;
+    }
+}
+
+@keyframes idx-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .idx-fade-up,
+    .idx-fade-up-delay,
+    .idx-upload,
+    .idx-btn-primary,
+    .idx-btn-secondary {
+        animation: none;
+        transition: none;
+    }
+}
