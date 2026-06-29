@@ -2,6 +2,9 @@ import { t, toggleLocale, getLocale } from './i18n';
 import { parseDocx } from './lib/verseIndexParser';
 import { sortAndGroup } from './lib/verseIndexSorter';
 import { exportDocx } from './lib/verseIndexExporter';
+import { buildPreviewReport, PreviewReport } from './lib/previewReport';
+import { renderPreviewPanel, PreviewTab } from './lib/previewPanel';
+import { formatPreviewCount } from './lib/arabicNumerals';
 
 const MAX_SIZE = 10 * 1024 * 1024;
 const TEMPLATE_URL = `${import.meta.env.BASE_URL}template.docx`;
@@ -15,6 +18,8 @@ interface State {
   processing: boolean;
   downloadBlob: Blob | null;
   error: string | null;
+  preview: PreviewReport | null;
+  previewTab: PreviewTab;
 }
 
 const state: State = {
@@ -26,6 +31,8 @@ const state: State = {
   processing: false,
   downloadBlob: null,
   error: null,
+  preview: null,
+  previewTab: 'merges',
 };
 
 let toastTimer: ReturnType<typeof setTimeout> | null = null;
@@ -55,6 +62,8 @@ function resetState(): void {
   state.processing = false;
   state.downloadBlob = null;
   state.error = null;
+  state.preview = null;
+  state.previewTab = 'merges';
 }
 
 function render(): void {
@@ -143,6 +152,33 @@ function render(): void {
                 ${state.ready ? `<button type="button" class="idx-btn-success" id="download-btn">${t('download_action')}</button>` : ''}
                 ${state.fileName || state.ready ? `<button type="button" class="idx-btn-secondary" id="reset-btn">${t('reset_action')}</button>` : ''}
               </div>
+
+              ${state.preview ? `
+                <button type="button" class="idx-preview-cue" id="preview-cue-btn">
+                  <span class="idx-preview-cue-icon" aria-hidden="true">👁</span>
+                  <span class="idx-preview-cue-body">
+                    <span class="idx-preview-cue-title">${t('preview_cue_title')}</span>
+                    <span class="idx-preview-cue-lead">${t('preview_cue_lead')}</span>
+                    <span class="idx-preview-cue-stats">
+                      <span>${formatPreviewCount(state.preview.beforeCount)} ${t('preview_before_label')}</span>
+                      <span aria-hidden="true">→</span>
+                      <span>${formatPreviewCount(state.preview.afterCount)} ${t('preview_after_label')}</span>
+                      <span>· ${formatPreviewCount(state.preview.mergeOperations)} ${t('preview_merge_label')}</span>
+                    </span>
+                  </span>
+                  <span class="idx-preview-cue-action">
+                    <span>${t('preview_cue_action')}</span>
+                    <span class="idx-preview-cue-arrow" aria-hidden="true">↓</span>
+                  </span>
+                </button>
+              ` : state.fileName && !state.processing ? `
+                <div class="idx-preview-cue idx-preview-cue-muted">
+                  <span class="idx-preview-cue-icon" aria-hidden="true">📋</span>
+                  <span class="idx-preview-cue-body">
+                    <span class="idx-preview-cue-lead">${t('preview_cue_hint')}</span>
+                  </span>
+                </div>
+              ` : ''}
             </div>
 
             <aside class="space-y-5">
@@ -196,6 +232,8 @@ function render(): void {
               </div>
             </aside>
           </section>
+
+          ${state.preview ? renderPreviewPanel(state.preview, state.previewTab) : ''}
         </div>
       </main>
 
@@ -240,6 +278,7 @@ function bindEvents(): void {
     state.downloadBlob = null;
     state.entryCount = null;
     state.surahCount = null;
+    state.preview = null;
     render();
   });
 
@@ -258,6 +297,8 @@ function bindEvents(): void {
 
       state.entryCount = entries.length;
       state.surahCount = groups.length;
+      state.preview = buildPreviewReport(entries, groups);
+      state.previewTab = state.preview.mergeOperations > 0 ? 'merges' : 'after';
       state.downloadBlob = blob;
       state.ready = true;
       showToast(t('success'));
@@ -289,6 +330,19 @@ function bindEvents(): void {
   document.getElementById('reset-btn')?.addEventListener('click', () => {
     resetState();
     render();
+  });
+
+  document.querySelectorAll('[data-preview-tab]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const tab = (button as HTMLElement).dataset.previewTab as PreviewTab | undefined;
+      if (!tab || !state.preview) return;
+      state.previewTab = tab;
+      render();
+    });
+  });
+
+  document.getElementById('preview-cue-btn')?.addEventListener('click', () => {
+    document.getElementById('idx-preview')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
 

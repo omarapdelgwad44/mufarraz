@@ -25,3 +25,11 @@ const WESTERN_TO_ARABIC_INDIC = '٠١٢٣٤٥٦٧٨٩';
 export function toArabicIndic(value: string): string {
   return value.replace(/\d/g, (digit) => WESTERN_TO_ARABIC_INDIC[Number(digit)]);
 }
+
+export function formatPreview(value: string): string {
+  return toArabicIndic(toWestern(value));
+}
+
+export function formatPreviewCount(count: number): string {
+  return toArabicIndic(String(count));
+}

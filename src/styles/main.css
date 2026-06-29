@@ -217,6 +217,18 @@
         font-family: 'Traditional Arabic', var(--font-display), serif;
         font-variant-numeric: tabular-nums;
         white-space: nowrap;
+        display: inline-block;
+    }
+
+    .idx-page-ref-inner {
+        direction: ltr;
+        unicode-bidi: isolate;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .idx-page-ref-sep {
+        unicode-bidi: isolate;
     }
 
     .idx-mark-ref {
@@ -225,6 +237,213 @@
         background: rgb(255 255 255 / 0.9);
         font-family: var(--font-display), serif;
         white-space: nowrap;
+    }
+
+    .idx-preview-section {
+        @apply mt-8;
+    }
+
+    .idx-preview-card {
+        @apply overflow-hidden;
+    }
+
+    .idx-preview-header {
+        @apply mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between;
+    }
+
+    .idx-preview-summary {
+        @apply flex flex-wrap items-center gap-2;
+    }
+
+    .idx-preview-pill {
+        @apply rounded-full border px-3 py-1.5 text-xs font-semibold text-ink-soft;
+        border-color: rgb(19 35 31 / 0.08);
+        background: rgb(255 255 255 / 0.75);
+    }
+
+    .idx-preview-pill-accent {
+        @apply text-accent-deep;
+        border-color: rgb(45 106 79 / 0.18);
+        background: rgb(232 244 237 / 0.75);
+    }
+
+    .idx-preview-pill-gold {
+        @apply text-gold;
+        border-color: rgb(166 124 61 / 0.22);
+        background: rgb(255 251 243 / 0.9);
+    }
+
+    .idx-preview-pill-arrow {
+        @apply text-sm text-muted;
+    }
+
+    .idx-preview-tabs {
+        @apply mb-4 flex flex-wrap gap-2;
+    }
+
+    .idx-preview-tab {
+        @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition;
+        border-color: rgb(19 35 31 / 0.1);
+        background: rgb(255 253 248 / 0.9);
+        color: var(--color-ink-soft);
+    }
+
+    .idx-preview-tab.is-active {
+        @apply border-accent/30 text-accent-deep;
+        background: rgb(232 244 237 / 0.8);
+    }
+
+    .idx-preview-tab-count {
+        @apply rounded-full px-2 py-0.5 text-xs;
+        background: rgb(19 35 31 / 0.06);
+    }
+
+    .idx-preview-table-wrap {
+        @apply max-h-[28rem] overflow-auto rounded-[1.25rem] border;
+        border-color: rgb(19 35 31 / 0.08);
+    }
+
+    .idx-preview-table {
+        @apply w-full min-w-[42rem] border-collapse text-sm;
+    }
+
+    .idx-preview-table thead {
+        @apply sticky top-0 z-10;
+        background: rgb(243 237 226 / 0.96);
+    }
+
+    .idx-preview-table th {
+        @apply border-b px-4 py-3 text-start text-xs font-bold uppercase tracking-wide text-muted;
+        border-color: rgb(19 35 31 / 0.08);
+    }
+
+    .idx-preview-table td {
+        @apply border-b px-4 py-3 align-top text-ink-soft;
+        border-color: rgb(19 35 31 / 0.05);
+    }
+
+    .idx-preview-table tbody tr:hover {
+        background: rgb(255 255 255 / 0.55);
+    }
+
+    .idx-preview-merge-row {
+        background: rgb(255 251 243 / 0.45);
+    }
+
+    .idx-preview-merge-cell {
+        @apply min-w-[22rem] p-3;
+    }
+
+    .idx-merge-flow {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .idx-merge-group {
+        @apply flex min-w-0 flex-col gap-1.5;
+    }
+
+    .idx-merge-group-after {
+        @apply flex-1;
+    }
+
+    .idx-merge-label {
+        @apply text-[0.68rem] font-bold uppercase tracking-[0.16em] text-muted;
+    }
+
+    .idx-merge-pages-inline {
+        @apply flex flex-wrap items-center gap-1.5;
+    }
+
+    .idx-page-ref-result {
+        @apply inline-block max-w-full text-base;
+    }
+
+    .idx-merge-arrow {
+        @apply shrink-0 text-xl font-bold leading-none text-gold;
+    }
+
+    .idx-preview-surah {
+        @apply font-semibold text-ink;
+        font-family: var(--font-display);
+        white-space: nowrap;
+    }
+
+    .idx-preview-verse {
+        @apply max-w-md leading-7;
+        font-family: var(--font-display);
+    }
+
+    .idx-preview-ayah {
+        @apply whitespace-nowrap font-medium text-ink;
+    }
+
+    .idx-preview-page-stack {
+        @apply flex flex-wrap gap-1.5;
+    }
+
+    .idx-page-ref-muted {
+        @apply text-ink-soft;
+        background: rgb(255 255 255 / 0.9);
+    }
+
+    .idx-preview-empty {
+        @apply px-4 py-8 text-center text-sm text-muted;
+    }
+
+    .idx-preview-cue {
+        @apply mt-6 flex w-full items-center gap-4 rounded-[1.25rem] border px-4 py-4 text-start transition duration-300;
+        border-color: rgb(45 106 79 / 0.2);
+        background: linear-gradient(145deg, rgb(232 244 237 / 0.75), rgb(255 253 248 / 0.95));
+    }
+
+    button.idx-preview-cue {
+        @apply cursor-pointer;
+    }
+
+    button.idx-preview-cue:hover {
+        border-color: rgb(45 106 79 / 0.35);
+        transform: translateY(-1px);
+        box-shadow: 0 14px 30px -24px rgb(45 106 79 / 0.55);
+    }
+
+    .idx-preview-cue-muted {
+        border-color: rgb(19 35 31 / 0.08);
+        background: rgb(255 255 255 / 0.55);
+    }
+
+    .idx-preview-cue-icon {
+        @apply flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg;
+        background: rgb(45 106 79 / 0.12);
+    }
+
+    .idx-preview-cue-body {
+        @apply min-w-0 flex-1;
+    }
+
+    .idx-preview-cue-title {
+        @apply block text-sm font-bold text-accent-deep;
+    }
+
+    .idx-preview-cue-lead {
+        @apply mt-1 block text-sm leading-7 text-ink-soft;
+    }
+
+    .idx-preview-cue-stats {
+        @apply mt-2 flex flex-wrap items-center gap-2 text-xs font-semibold text-muted;
+    }
+
+    .idx-preview-cue-action {
+        @apply hidden shrink-0 flex-col items-center gap-1 text-xs font-bold text-accent-deep sm:flex;
+    }
+
+    .idx-preview-cue-arrow {
+        @apply text-lg leading-none;
+        animation: idx-cue-bounce 1.4s ease-in-out infinite;
+    }
+
+    @keyframes idx-cue-bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(4px); }
     }
 
     .idx-ornament {
